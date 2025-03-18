@@ -19,7 +19,7 @@ class TicketIngestor
         {
             // TODO: Consider simplifying by ensuring the generated data is already in exactly the right form
             var generated = (await JsonSerializer.DeserializeAsync<GeneratedTicket>(File.OpenRead(filename), inputOptions))!;
-            var customer = customersByName.GetOrAdd(generated.CustomerFullName, name => new Customer { FullName = name, CustomerId = ++customerId });
+            var customer = customersByName.GetOrAdd(generated.CustomerFullName, name => new Customer { FullName = name, customer_id = ++customerId });
 
             tickets.Add(new Ticket
             {
@@ -27,7 +27,7 @@ class TicketIngestor
                 ProductId = generated.ProductId,
                 TicketType = Enum.Parse<TicketType>(generated.TicketType),
                 TicketStatus = Enum.Parse<TicketStatus>(generated.TicketStatus),
-                CustomerId = customer.CustomerId,
+                CustomerId = customer.customer_id,
                 Customer = customer,
                 ShortSummary = generated.ShortSummary,
                 LongSummary = generated.LongSummary,

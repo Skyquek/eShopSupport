@@ -7,9 +7,7 @@ namespace eShopSupport.Backend.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){}
 
     public DbSet<Customer> Customers { get; set; }
 
@@ -64,7 +62,7 @@ public class AppDbContext : DbContext
             foreach (var ticket in tickets)
             {
                 ticket.TicketId = 0;
-                ticket.Customer = customers.First(c => c.CustomerId == ticket.CustomerId);
+                ticket.Customer = customers.First(c => c.customer_id == ticket.CustomerId);
                 ticket.CreatedAt = DateTime.UtcNow;
                 foreach (var message in ticket.Messages)
                 {
@@ -74,12 +72,12 @@ public class AppDbContext : DbContext
             }
             foreach (var customer in customers)
             {
-                customer.CustomerId = 0;
+                customer.customer_id = 0;
             }
 
             // These users correspond to entries in IdentityServer's TestUsers class
-            await dbContext.Customers.AddAsync(new Customer { CustomerId = 10000, FullName = "Alice Smith" });
-            await dbContext.Customers.AddAsync(new Customer { CustomerId = 10001, FullName = "Bob Smith" });
+            await dbContext.Customers.AddAsync(new Customer { customer_id = 10000, FullName = "Alice Smith" });
+            await dbContext.Customers.AddAsync(new Customer { customer_id = 10001, FullName = "Bob Smith" });
 
             await dbContext.Customers.AddRangeAsync(customers);
             await dbContext.ProductCategories.AddRangeAsync(categories);

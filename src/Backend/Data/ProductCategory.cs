@@ -9,5 +9,5 @@ public class ProductCategory
 
     public required string Name { get; set; }
 
-    public required string NameEmbeddingBase64 { get; set; }
+    public required string nameEmbeddingBase64 { get; set; }
 }
