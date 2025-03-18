@@ -11,4 +11,6 @@ public class Message
     public bool IsCustomerMessage { get; set; }
 
     public required string Text { get; set; }
+
+    public string titel { get; set; }
 }
